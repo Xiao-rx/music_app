@@ -41,19 +41,40 @@ $(function(){
         player.prop('src',m.path)
         //主动触发play函数
         player.trigger('play');
+        startPlay(m)
+        
+        $.each($("#music-list li"),(i,e)=>{
+            if(e.classList.contains('active')){
+                e.classList.remove('active')
+            }
+        })
+        $(this)[0].classList.add("active")
+
     })    
 
     //封装一个公共函数,实现歌曲播放信息状态同步显示
-    function startPlay(){
-        //1.实现唱片旋转
-        //2.在头部显示歌曲名称
-        //3.播放按钮切换为暂停
-        //4.列表中正在播放的歌曲高亮展示
+    function startPlay(m){
+        $(".cover")[0].classList.add("playing")
+        $(".btn-play-pause i")[0].classList.replace("fa-play","fa-pause")
+        $(".music-name").text(m.name)
     }
 
     //扩展（查看Audio-api）
     //1. 同步动态显示播放时长和当前进度
     //2. 进度条同步显示
+
+    $(".btn-play-pause i").on('click',function(){
+        if($(".btn-play-pause i")[0].classList[1] == "fa-play"){
+            player.trigger('play')
+            $(".btn-play-pause i")[0].classList.replace("fa-play","fa-pause")
+            $(".cover")[0].classList.add("playing")
+        }
+        else{
+            player.trigger('pause')
+            $(".btn-play-pause i")[0].classList.replace("fa-pause","fa-play")
+            $(".cover")[0].classList.remove("playing")
+        }
+    })
 
 })
 

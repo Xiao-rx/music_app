@@ -172,6 +172,10 @@ body{
     border-bottom: 1px dotted rgba(255,255,255,.2);
 }
 
+.active{
+    background-color: rgba(255,255,255,0.3);
+}
+
 
 /* 创建自定义动画 */
 @keyframes loop{
